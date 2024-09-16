@@ -21,12 +21,13 @@ class CustomImageCard extends StatelessWidget {
         color: Colors.white, // Background color for the container
       ),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(15), // Match container's border radius
+        borderRadius: BorderRadius.circular(15),
+        // Match container's border radius
         child: Image.network(
           imageUrl,
           fit: BoxFit.cover,
-          loadingBuilder:
-              (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+          loadingBuilder: (BuildContext context, Widget child,
+              ImageChunkEvent? loadingProgress) {
             if (loadingProgress == null) {
               return child;
             } else {

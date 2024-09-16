@@ -2,12 +2,13 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:galleryy/cubits/login_cubit.dart';
+import 'package:galleryy/cubits/LoginCubit/login_cubit.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 import '../widgets/Button.dart';
 import '../widgets/CustomTextField.dart';
-import 'HomePage.dart';
+
+import 'home_View.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -35,6 +36,13 @@ class LoginPage extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder: ((context) => const HomePage()),
+            ),
+          );
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text("Success Login✅✅"),
+              backgroundColor: Colors.green,
+              duration: Duration(seconds: 2),
             ),
           );
           isLoading = false;

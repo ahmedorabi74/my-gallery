@@ -4,8 +4,10 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:meta/meta.dart';
 
-import '../constant/constants.dart';
+import '../../constant/constants.dart';
 import 'package:http/http.dart' as http;
+
+import '../../main.dart';
 
 part 'login_state.dart';
 
@@ -27,12 +29,14 @@ class LoginCubit extends Cubit<LoginState> {
       if (response.statusCode == 200) {
         Map<String, dynamic> data = jsonDecode(response.body);
         if (data.containsKey('token')) {
-          // sharedPref.setString("token", data["token"]);
-          // Constants.userToken = data["token"];
+          sharedPref.setString("token", data["token"]);
+          Constants.userToken = data["token"];
+          sharedPref.setString("name", data["user"]["name"]);
+
           emit(LoginSuccess());
         } else if (data.containsKey('error_message')) {
           emit(LoginFailure(
-              errorMessage: "invaled email or password,please try again"));
+              errorMessage: "invalid email or password,please try again"));
         } else {
           // Handle unexpected response structure
           emit(LoginFailure(
